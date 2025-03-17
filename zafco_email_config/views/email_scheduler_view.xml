@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="zafco_email_scheduler_tree" model="ir.ui.view">
+        <field name="name">zafco.email.scheduler.view.tree</field>
+        <field name="model">zafco.email.scheduler</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id" />
+                <field name="dashboard_ids" widget="many2many_tags" />
+                <field name="is_active" />
+            </tree>
+        </field>
+    </record>
+    <record id="zafco_email_scheduler_form" model="ir.ui.view">
+        <field name="name">zafco.email.scheduler.view.form</field>
+        <field name="model">zafco.email.scheduler</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id" />
+                            <field name="partner_email" />
+                        </group>
+                        <group>
+                            <field name="is_active" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="dashboard" string="Dashboard">
+                            <field name="dashboard_ids">
+                                <tree>
+                                    <field name="name" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="zafco_email_config_form" model="ir.ui.view">
+        <field name="name">zafco.email.config.view.form</field>
+        <field name="model">zafco.email.config</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="expiration_hour" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_zafco_email_scheduler" model="ir.actions.act_window">
+        <field name="name">Email Scheduler</field>
+        <field name="res_model">zafco.email.scheduler</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Create a new Email Scheduler
+            </p>
+        </field>
+    </record>
+    <record id="action_zafco_email_config" model="ir.actions.act_window">
+        <field name="name">Email Scheduler Config</field>
+        <field name="res_model">zafco.email.config</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="context">{}</field>
+        <field name="res_id" ref="zafco_email_config.default_email_config"/>
+    </record>
+
+    <menuitem
+        id="zafco_email_scheduler_menu_root"
+        name="Email Scheduler"
+        parent="izi_data.izi_dashboard_root"
+        sequence="42"/>
+    <menuitem
+        id="zafco_email_scheduler_menu"
+        name="Email Scheduler"
+        action="action_zafco_email_scheduler"
+        parent="zafco_email_scheduler_menu_root"
+        sequence="10"/>
+    <menuitem
+        id="zafco_email_config_menu"
+        name="Email Scheduler Config"
+        action="action_zafco_email_config"
+        parent="zafco_email_scheduler_menu_root"
+        sequence="20"/>
+</odoo>

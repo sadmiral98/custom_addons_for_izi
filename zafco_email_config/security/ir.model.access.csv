@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_zafco_email_scheduler,zafco.email.scheduler,model_zafco_email_scheduler,,1,1,1,1
+access_zafco_email_config,zafco.email.config,model_zafco_email_config,,1,1,1,1
