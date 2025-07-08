@@ -123,6 +123,8 @@ class WhatsAppMessage(models.Model):
     def _send_message(self, with_commit=False, reply_data={}):
         """ Prepare json data for sending messages, attachments and templates."""
         # init api
+        if not reply_data:
+            reply_data = self.env.context.get('reply_data',{})
         message_to_api = {}
         for account, messages in groupby(self, lambda msg: msg.wa_account_id):
             if not account:
